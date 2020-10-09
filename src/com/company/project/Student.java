@@ -3,17 +3,26 @@ package com.company.project;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Student implements Nameable {
+public class Student implements Nameable, HasLevel {
 
     //list of grades
     private List<Double> gradesList = new ArrayList<>();
     private String name;
+    private Level level;
 
     public Student() {
-
     }
 
     public Student(String name) {
+        this.name = name;
+    }
+
+    public Student(Level level) {
+        this.level = level;
+    }
+
+    public Student(String name, Level level) {
+        this.level = level;
         this.name = name;
     }
 
@@ -41,5 +50,10 @@ public class Student implements Nameable {
     @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public Level getLevel() {
+        return this.level;
     }
 }
