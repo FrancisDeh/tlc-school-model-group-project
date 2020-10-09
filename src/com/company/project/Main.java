@@ -54,5 +54,10 @@ public class Main {
 //        }
         System.out.println(register.printReport());
 
+        Bag<String> stringsBag = new Bag<String>();
+        stringsBag.add("Hello");
+        stringsBag.add("World");
+        stringsBag.remove("Hello");
+        stringsBag.clear();
     }
 }
