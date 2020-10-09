@@ -1,5 +1,6 @@
 package com.company.project;
 
+import javax.lang.model.type.NullType;
 import java.util.*;
 
 public class Register {
@@ -64,5 +65,24 @@ public class Register {
     public List<Student> sort(Comparator<Student> comparator) {
         Collections.sort(this.nameables, comparator);
         return this.nameables;
+    }
+
+    public Student getStudentByName(String name) throws StudentNotFoundException  {
+        Student student = new Student();
+        boolean studentIsFound = false;
+
+        for (Student s: this.nameables) {
+            if(s.getName().equals(name)) {
+                student = s;
+                studentIsFound = true;
+                break;
+            }
+        }
+
+        if(!studentIsFound) {
+            throw new StudentNotFoundException("Student ".concat(name).concat(" not found"));
+        }
+
+        return student;
     }
 }
