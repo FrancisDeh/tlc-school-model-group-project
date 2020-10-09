@@ -41,23 +41,23 @@ public class Main {
 //        System.out.println(lecture.getHighestAverageGrade());
 
 
-        List<Nameable> studentList = new ArrayList<>();
-        studentList.add(new Student("Mike", Level.ONE));
-        studentList.add(new Student("Raphael", Level.TWO));
-        studentList.add(new Student("Bridget", Level.TWO));
-        studentList.add(new Student("Francis", Level.ONE));
-
-        Register register = new Register(studentList);
+//        List<Nameable> studentList = new ArrayList<>();
+//        studentList.add(new Student("Mike", Level.ONE));
+//        studentList.add(new Student("Raphael", Level.TWO));
+//        studentList.add(new Student("Bridget", Level.TWO));
+//        studentList.add(new Student("Francis", Level.ONE));
+//
+//        Register register = new Register(studentList);
 //        List<String> list = register.getRegisterByLevel(Level.ONE);
 //        for (String name: list) {
 //            System.out.println(name);
 //        }
-        System.out.println(register.printReport());
-
-        Bag<String> stringsBag = new Bag<String>();
-        stringsBag.add("Hello");
-        stringsBag.add("World");
-        stringsBag.remove("Hello");
-        stringsBag.clear();
+//        System.out.println(register.printReport());
+//
+//        Bag<String> stringsBag = new Bag<String>();
+//        stringsBag.add("Hello");
+//        stringsBag.add("World");
+//        stringsBag.remove("Hello");
+//        stringsBag.clear();
     }
 }

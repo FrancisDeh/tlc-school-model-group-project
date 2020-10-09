@@ -11,7 +11,7 @@ class RegisterTest {
 
     @Test
     public void getRegisterReturnsAListOfStudents(){
-        List<Nameable> studentList = new ArrayList<>();
+        List<Student> studentList = new ArrayList<>();
         studentList.add(new Student("Mike"));
         studentList.add(new Student("Raphael"));
         studentList.add(new Student("Bridget"));

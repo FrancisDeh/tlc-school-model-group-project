@@ -1,13 +1,12 @@
 package com.company.project;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Register {
-    private List<Nameable> nameables = new ArrayList<>();
+    private List<Student> nameables = new ArrayList<>();
 
-    public Register(List<Nameable> nameables){
-        this.nameables = nameables;
+    public Register(List<Student> students){
+        this.nameables = students;
     }
 
     public List<String> getRegister(){
@@ -18,22 +17,30 @@ public class Register {
         return names;
     }
 
-    public List<String> getRegisterByLevel(Level level) {
-        List<String> names = new ArrayList<>();
+    public Map<Level, List<Student>> getRegisterByLevel(Level level) {
+        List<Student> students = new ArrayList<>();
 
-        for (Nameable nameable: this.nameables) {
-
-            Student student = (Student) nameable;
+        for (Student student: this.nameables) {
             if(student.getLevel().equals(level)) {
-                names.add(nameable.getName());
+                students.add(student);
             }
         }
-        return names;
+
+        //{
+        // ONE: [Student1, Student2..]
+        // }
+        Map<Level, List<Student>> studentMap = new HashMap<>();
+        studentMap.put(level, students);
+
+        return studentMap;
     }
 
     public String printReport() {
-        List<String> levelOneStudentNames = getRegisterByLevel(Level.ONE);
-        List<String> levelTwoStudentNames = getRegisterByLevel(Level.TWO);
+        Map<Level, List<Student>> levelOneStudentMap = getRegisterByLevel(Level.ONE);
+        List<Student> levelOneStudents = levelOneStudentMap.get(Level.ONE);
+
+        Map<Level, List<Student>> levelTwoStudentMap = getRegisterByLevel(Level.TWO);
+        List<Student> levelTwoStudents = levelOneStudentMap.get(Level.TWO);
 
         //Level One
         // -- John
@@ -42,15 +49,20 @@ public class Register {
         // -- xyz
         StringBuilder builder = new StringBuilder();
         builder.append("Level One\n");
-        for (String name: levelOneStudentNames) {
-            builder.append(name.concat("\n"));
+        for (Student student: levelOneStudents) {
+            builder.append(student.getName().concat("\n"));
         }
 
         builder.append("\nLevel Two\n");
-        for (String name: levelTwoStudentNames) {
-            builder.append(name.concat("\n"));
+        for (Student student: levelTwoStudents) {
+            builder.append(student.getName().concat("\n"));
         }
 
         return builder.toString();
+    }
+
+    public List<Student> sort(Comparator<Student> comparator) {
+        Collections.sort(this.nameables, comparator);
+        return this.nameables;
     }
 }
