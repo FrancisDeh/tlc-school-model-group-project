@@ -21,15 +21,20 @@ class NaughtyStudentTest {
     }
     @Test
     public void naughtyStudentsScoresHigher(){
-        Student student3 = new NaughtyStudent();
-        student3.setGrade(70.0);
-        student3.setGrade(85.0);
+        Student naughtyStudent = new NaughtyStudent();
+        naughtyStudent.setGrade(70.0);
+        naughtyStudent.setGrade(85.0);
 
-        Student student2 = new Student();
-        student2.setGrade(70.0);
-        student2.setGrade(85.0);
+        Student student = new Student();
+        student.setGrade(70.0);
+        student.setGrade(85.0);
 
-        assertTrue(student3.getAverageGrade() > student2.getAverageGrade(),"naughty student did not score higher than other students");
+        Lecture lecture = new Lecture();
+        lecture.enter(student);
+        lecture.enter(naughtyStudent);
+
+
+        assertEquals(naughtyStudent.getAverageGrade(), lecture.getHighestAverageGrade(), "naughty student did not score higher than other students");
     }
 }
 
