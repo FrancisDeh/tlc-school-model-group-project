@@ -16,6 +16,10 @@ public class Main {
         student2.setGrade(70.0);
         student2.setGrade(85.0);
 
+        Student student3 = new NaughtyStudent();
+        student3.setGrade(70.0);
+        student3.setGrade(85.0);
+
         //[45.0, 35.0]
         List<Double> grades = student.getGrades();
         Collections.sort(grades);
@@ -25,11 +29,17 @@ public class Main {
 
         System.out.println("Average " + student.getAverageGrade());
 
+        System.out.println("Average2 " + student2.getAverageGrade());
+        System.out.println("Average NaughtyStudent " + student3.getAverageGrade());
+
+
         Lecture lecture = new Lecture();
         lecture.enter(student);
         lecture.enter(student2);
 
         System.out.println(lecture.getHighestAverageGrade());
+
+
 
     }
 }
