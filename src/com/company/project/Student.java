@@ -9,6 +9,14 @@ public class Student implements Nameable {
     private List<Double> gradesList = new ArrayList<>();
     private String name;
 
+    public Student() {
+
+    }
+
+    public Student(String name) {
+        this.name = name;
+    }
+
     public void setGrade(Double grade) {
         this.gradesList.add(grade);
     }
