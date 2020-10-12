@@ -2,7 +2,6 @@ package com.company.project;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 
 public class Register {
     final private List<? extends Student> students;
@@ -95,6 +94,18 @@ public class Register {
         }
 
         return foundStudents.get(0);
+    }
+
+    public Optional<? extends Student> studentByName(String name) {
+        return this.students.stream().
+                filter(s -> s.getName().equals(name))
+                .collect(Collectors.toList()).stream().findFirst();
+    }
+
+    public List<Student> getStudentsByNames(List<String> names) {
+       return this.students.stream().
+                filter(s -> names.contains(s.getName()))
+                .collect(Collectors.toList());
     }
 
     public Double highestStudentGrade() {
