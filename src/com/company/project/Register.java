@@ -1,37 +1,37 @@
 package com.company.project;
 
-import javax.lang.model.type.NullType;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 public class Register {
-    private List<? extends Student> nameables = new ArrayList<>();
+    final private List<? extends Student> students;
 
-    public Register(List<? extends Student> students){
-        this.nameables = students;
+    public Register(List<? extends Student> students) {
+        this.students = students;
     }
 
-    public List<String> getRegister(){
+    public List<String> getRegister() {
 //        List<String> names = new ArrayList<>();
 //        for (Nameable nameable: this.nameables) {
 //            names.add(nameable.getName());
 //        }
 //        return names;
 
-       return this.nameables.stream()
-               .map(Student::getName)
-               .collect(Collectors.toList());
+        return this.students.stream()
+                .map(Student::getName)
+                .collect(Collectors.toList());
     }
 
     public Map<Level, List<Student>> getRegisterByLevel(Level level) {
-        List<Student> students = new ArrayList<>();
+        List<Student> students;
 
 //        for (Student student: this.nameables) {
 //            if(student.getLevel().equals(level)) {
 //                students.add(student);
 //            }
 //        }
-        students = this.nameables.stream()
+        students = this.students.stream()
                 .filter(student -> student.getLevel().equals(level))
                 .collect(Collectors.toList());
 
@@ -70,11 +70,11 @@ public class Register {
     }
 
     public List<? extends Student> sort(Comparator<Student> comparator) {
-        Collections.sort(this.nameables, comparator);
-        return this.nameables;
+        Collections.sort(this.students, comparator);
+        return this.students;
     }
 
-    public Student getStudentByName(String name) throws StudentNotFoundException  {
+    public Student getStudentByName(String name) throws StudentNotFoundException {
 //        Student student = new Student();
 //        boolean studentIsFound = false;
 
@@ -86,14 +86,41 @@ public class Register {
 //            }
 //        }
 
-       List<Student> foundStudents = this.nameables.stream().
-               filter(s -> s.getName().equals(name))
-               .collect(Collectors.toList());
+        List<Student> foundStudents = this.students.stream().
+                filter(s -> s.getName().equals(name))
+                .collect(Collectors.toList());
 
-        if(foundStudents.isEmpty()) {
+        if (foundStudents.isEmpty()) {
             throw new StudentNotFoundException("Student ".concat(name).concat(" not found"));
         }
 
         return foundStudents.get(0);
+    }
+
+    public Double highestStudentGrade() {
+//        return this.students.stream().map(Student::getGrades)
+//                .flatMap(Collection::stream)
+//                .max(Comparator.naturalOrder())
+//                .orElse(0.0);
+
+        return this.students.stream().map(Student::getGrades)
+                .flatMap(Collection::stream)
+                .mapToDouble(Double::doubleValue)
+                .max()
+                .orElse(0.0);
+    }
+
+    public Double averageStudentGrades() {
+        return this.students.stream().map(Student::getGrades)
+                .flatMap(Collection::stream)
+                .mapToDouble(Double::doubleValue)
+                .summaryStatistics().getAverage();
+    }
+
+    public List<Double> gradesAboveSixty() {
+        return this.students.stream().map(Student::getGrades)
+                .flatMap(Collection::stream)
+                .filter(d -> d > 60)
+                .collect(Collectors.toList());
     }
 }

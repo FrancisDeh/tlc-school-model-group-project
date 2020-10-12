@@ -2,6 +2,7 @@ package com.company.project;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.DoubleStream;
 
 public class Student implements Nameable, HasLevel {
 
@@ -55,5 +56,11 @@ public class Student implements Nameable, HasLevel {
     @Override
     public Level getLevel() {
         return this.level;
+    }
+
+    public DoubleStream grades() {
+        return this.gradesList
+                .stream()
+                .mapToDouble(d -> d);
     }
 }
